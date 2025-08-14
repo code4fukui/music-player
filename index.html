@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+  <title>MUSIC PLAYER with MediaSession API</title>
+
+  <!-- PWA: 必須 -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#111111">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; padding: 24px; line-height: 1.5; }
+    button { font-size: 18px; padding: 10px 16px; }
+    .row { display: flex; gap: 12px; align-items: center; margin: 8px 0; }
+    img { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>MUSIC PLAYER with MediaSession API</h1>
+
+  <!-- iOSはユーザー操作必須。playsinline/controls推奨 -->
+  <audio id="player" preload="metadata" playsinline></audio>
+
+  <div class="row">
+    <img id="art" alt="artwork">
+    <div>
+      <div id="title">Song Title</div>
+      <div id="artist">Artist</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <button id="play">▶︎ 再生</button>
+    <button id="pause">⏸ 一時停止</button>
+    <button id="prev">« 前</button>
+    <button id="next">次 »</button>
+    <span id="time">0:00</span>
+  </div>
+
+
+  <script type="module" src="/app.js"></script>
+  <hr>
+  <div><a href=https://github.com/code4fukui/music-player>src on GitHub</a></div>
+
+<!--
+  <div class="row">
+    <input id="src" size="50"
+      placeholder="https://example.com/audio.m4a（HLSは.m3u8も可）">
+    <button id="load">読み込み</button>
+  </div>
+-->
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+/* === CarPlay Web Player — Dark, Simple & Cool === */
+:root {
+  --bg: #0c0d10;
+  --bg-elev: #15171c;
+  --text: #e8eaed;
+  --muted: #9aa0a6;
+  --border: #24272f;
+  --accent: #6aa0ff;       /* さりげない青アクセント */
+  --accent-press: #4f86e5;
+  --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+  --radius: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: dark; }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
+  letter-spacing: .01em;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, #151925 0%, rgba(21,25,37,0) 60%),
+    radial-gradient(1000px 600px at 110% 30%, #121520 0%, rgba(18,21,32,0) 60%),
+    var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  display: grid;
+  place-items: start center;
+}
+
+/* レイアウト幅 */
+body > * {
+  width: 100%;
+  max-width: 760px;
+}
+
+/* タイトル */
+h1 {
+  margin: 4px 0 16px;
+  font-size: clamp(20px, 3.5vw, 28px);
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: var(--text);
+  text-shadow: 0 1px 0 rgba(0,0,0,.2);
+}
+
+/* 仕切り線 */
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 20px 0;
+}
+
+/* 行ブロック */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.0));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  margin: 10px 0;
+}
+
+/* アートワーク */
+#art {
+  width: clamp(72px, 20vw, 120px);
+  height: clamp(72px, 20vw, 120px);
+  object-fit: cover;
+  border-radius: 12px;
+  background: #0f1116;
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 20px rgba(0,0,0,.4);
+  user-select: none;
+}
+
+/* タイトル／アーティスト */
+#title {
+  font-weight: 700;
+  font-size: clamp(16px, 2.8vw, 20px);
+  line-height: 1.3;
+}
+
+#artist {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* プレーヤー操作 */
+button {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, #1a1d24, #12141a);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  cursor: pointer;
+  min-width: 88px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.4);
+  border-color: #2d3340;
+}
+
+button:active {
+  transform: translateY(0);
+  background: linear-gradient(180deg, #141821, #0f1217);
+  border-color: #2a3040;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button#play {
+  background: linear-gradient(180deg, #203150, #172438);
+  border-color: #27344d;
+}
+button#play:hover { border-color: #314262; }
+button#play:active { background: linear-gradient(180deg, #1b2a44, #121e31); }
+
+button#pause {
+  background: linear-gradient(180deg, #29272b, #18171a);
+}
+
+button#prev, button#next {
+  min-width: 70px;
+}
+
+/* 時刻表示 */
+#time {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #0f1116;
+}
+
+/* リンク */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(106,160,255,.35);
+}
+a:hover { border-bottom-style: solid; }
+a:active { color: var(--accent-press); }
+
+/* iOS: ユーザー操作以外のaudio UIは隠す */
+audio#player { display: none; }
+
+/* 小さめ端末最適化 */
+@media (max-width: 420px) {
+  .row { padding: 10px 12px; gap: 10px; }
+  button { padding: 9px 12px; min-width: 0; }
+  #time { padding: 6px 8px; }
+}
+
+/* 低モーション環境 */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

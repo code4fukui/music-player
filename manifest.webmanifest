@@ -1,0 +1,12 @@
+{
+  "name": "CarPlay Web Player",
+  "short_name": "WebPlayer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "icons": [
+    { "src": "/cover-handagote-beat.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
+
