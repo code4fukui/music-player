@@ -2,7 +2,7 @@ import { queue } from "./queue.js";
 
 // PWA: SW登録（オフライン/電波弱い時に効く）
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
+  navigator.serviceWorker.register('./sw.js');
 }
 
 const audio = document.getElementById('player');
