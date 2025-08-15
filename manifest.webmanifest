@@ -1,12 +1,11 @@
 {
-  "name": "CarPlay Web Player",
-  "short_name": "WebPlayer",
-  "start_url": "/",
+  "name": "MUSIC PLAYER with MusicSession API",
+  "short_name": "MUSIC PLAYER",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#111111",
   "theme_color": "#111111",
   "icons": [
-    { "src": "/cover-handagote-beat.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "/handagote-rhythm.jpg", "sizes": "512x512", "type": "image/png" }
   ]
 }
-
