@@ -1,13 +1,7 @@
 import { queue } from "./queue.js";
 
-// PWA: SW登録（オフライン/電波弱い時に効く）
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js');
-}
-
 const audio = document.getElementById('player');
 const $ = (id) => document.getElementById(id);
-
 
 let index = 0;
 
@@ -17,7 +11,7 @@ function loadTrack(i) {
   audio.src = t.src;
   $('title').textContent = t.title || '';
   $('artist').textContent = t.artist || '';
-  $('art').src = (t.artwork?.[t.artwork.length - 1]?.src) || '/cover-512.png';
+  $('art').src = (t.artwork?.[t.artwork.length - 1]?.src) || '';
 
   // Media Session: メタデータ
   if ('mediaSession' in navigator) {
@@ -94,7 +88,7 @@ function formatTime(sec) {
   sec = Math.floor(sec);
   const m = Math.floor(sec / 60);
   const s = sec % 60;
-  return `${m}:${s.toString().padStart(2,'0')}`;
+  return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
 // 初期化
