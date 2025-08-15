@@ -1,5 +1,12 @@
 export const queue = [
   {
+    src: "https://code4fukui.github.io/opendata-songs/handagote-song.mp3",
+    title: "はんだごてのうた",
+    artist: "taisukef",
+    album: "はんだごて",
+    artwork: [{ src: "https://code4fukui.github.io/opendata-songs/handagote-song.jpg", sizes: "512x512", type: "image/jpeg" }]
+  },
+  {
     src: "https://code4fukui.github.io/opendata-songs/handagote-rhythm.mp3",
     title: "はんだごてのリズム",
     artist: "taisukef",

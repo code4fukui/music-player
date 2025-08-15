@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
-  <title>MUSIC PLAYER with MediaSession API</title>
+  <title>MUSIC PLAYER / MediaSession API</title>
 
   <!-- PWA: 必須 -->
   <link rel="manifest" href="./manifest.webmanifest">
@@ -9,13 +9,13 @@
 
   <style>
     body { font-family: system-ui, -apple-system, sans-serif; padding: 24px; line-height: 1.5; }
-    button { font-size: 18px; padding: 10px 16px; }
+    button { font-size: 18px; padding: 10px 13px; }
     .row { display: flex; gap: 12px; align-items: center; margin: 8px 0; }
     img { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; }
   </style>
 </head>
 <body>
-  <h1>MUSIC PLAYER with MediaSession API</h1>
+  <h1>MUSIC PLAYER / MediaSession API</h1>
 
   <!-- iOSはユーザー操作必須。playsinline/controls推奨 -->
   <audio id="player" preload="metadata" playsinline></audio>
@@ -29,10 +29,10 @@
   </div>
 
   <div class="row">
-    <button id="play">▶︎ 再生</button>
-    <button id="pause">⏸ 一時停止</button>
-    <button id="prev">« 前</button>
-    <button id="next">次 »</button>
+    <button id="play">▶︎</button>
+    <button id="pause">■</button>
+    <button id="prev">«</button>
+    <button id="next">»</button>
     <span id="time">0:00</span>
   </div>
 
