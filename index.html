@@ -37,7 +37,17 @@
   </div>
 
 
-  <script type="module" src="./app.js"></script>
+  <script type="module">
+  import { init, initByM3U8 } from "./app.js";
+  import { queue } from "./queue.js";
+  
+  const url = new URLSearchParams(window.location.search).get("m3u8");
+  if (url) {
+    initByM3U8(url);
+  } else {
+    init(queue);
+  }
+  </script>
   <hr>
   <div><a href=https://github.com/code4fukui/music-player>src on GitHub</a></div>
 

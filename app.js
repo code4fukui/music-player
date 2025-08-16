@@ -1,14 +1,40 @@
-import { queue } from "./queue.js";
+import { M3U8 } from "https://code4fukui.github.io/M3U8/M3U8.js";
+import { MediaTags } from "https://code4fukui.github.io/jsmediatags-es/MediaTags.js";
 
 const audio = document.getElementById('player');
 const $ = (id) => document.getElementById(id);
 
 let index = 0;
+let queue = [];
 
-function loadTrack(i) {
+const bin2src = (bin, type) => {
+  return URL.createObjectURL(new Blob([bin], { type }))
+};
+
+async function loadTrack(i) {
   const t = queue[i];
   if (!t) return;
-  audio.src = t.src;
+  if (!t.title) {
+    const bin = new Uint8Array(await (await fetch(t.src)).arrayBuffer());
+    audio.src = bin2src(bin, "audio/mp3");
+    const tags = await MediaTags.decode(bin);
+    t.title = tags.tags.title;
+    t.artist = tags.tags.artist;
+    if (tags.tags.picture) {
+      const p = tags.tags.picture;
+      const bin = new Uint8Array(p.data);
+      const ext = p.format.substring(p.format.indexOf("/") + 1);
+      t.artwork = [
+        {
+          src: bin2src(bin, p.format),
+          sizes: "512x512",
+          type: p.format,
+        }
+      ];
+    }
+  } else {
+    audio.src = t.src;
+  }
   $('title').textContent = t.title || '';
   $('artist').textContent = t.artist || '';
   $('art').src = (t.artwork?.[t.artwork.length - 1]?.src) || '';
@@ -37,14 +63,14 @@ function updatePositionState() {
   } catch (_) { /* iOS未対応版があっても安全に無視 */ }
 }
 
-function prev() {
+async function prev() {
   index = (index - 1 + queue.length) % queue.length;
-  loadTrack(index);
+  await loadTrack(index);
   audio.play();
 }
-function next() {
+async function next() {
   index = (index + 1) % queue.length;
-  loadTrack(index);
+  await loadTrack(index);
   audio.play();
 }
 
@@ -92,4 +118,14 @@ function formatTime(sec) {
 }
 
 // 初期化
-loadTrack(index);
+export const init = async (files) => {
+  queue = files;
+  index = 0;
+  await loadTrack(index);
+};
+
+export const initByM3U8 = async (url) => {
+  const m3u8 = await M3U8.fetch(url);
+  const queue = m3u8.getFiles().map(i => ({ src: i }));
+  init(queue);
+};
