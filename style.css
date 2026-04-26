@@ -135,6 +135,45 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+label {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+select {
+  appearance: none;
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #1a1d24, #12141a);
+  color: var(--text);
+  font: inherit;
+  padding: 10px 36px 10px 12px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+    linear-gradient(135deg, var(--muted) 50%, transparent 50%),
+    linear-gradient(180deg, #1a1d24, #12141a);
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%,
+    0 0;
+  background-size: 6px 6px, 6px 6px, 100% 100%;
+  background-repeat: no-repeat;
+}
+
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+#albumtitle {
+  color: var(--muted);
+  font-size: 14px;
+  min-height: 1.5em;
+}
+
 button#play {
   background: linear-gradient(180deg, #203150, #172438);
   border-color: #27344d;

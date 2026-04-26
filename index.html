@@ -21,6 +21,13 @@
   <audio id="player" preload="metadata" playsinline></audio>
 
   <div class="row">
+    <label for="album">Album</label>
+    <select id="album"></select>
+  </div>
+
+  <div id="albumtitle"></div>
+
+  <div class="row">
     <img id="art" alt="artwork">
     <div>
       <div id="title">Song Title</div>
@@ -38,14 +45,17 @@
 
 
   <script type="module">
-  import { init, initByM3U8 } from "./app.js";
+  import { init, initByAlbumCSV, initByM3U8 } from "./app.js";
   import { queue } from "./queue.js";
   
   const url = new URLSearchParams(window.location.search).get("m3u8");
   if (url) {
     initByM3U8(url);
   } else {
-    init(queue);
+    initByAlbumCSV().catch((e) => {
+      console.error(e);
+      init(queue);
+    });
   }
   </script>
   <hr>
